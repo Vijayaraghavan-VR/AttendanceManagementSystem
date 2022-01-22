@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.exception.EmployeeNotFoundException;
+import com.example.demo.model.ApplyLeave;
 import com.example.demo.model.Attendance;
 
 @Service
@@ -46,6 +47,38 @@ public class GetEmployeeService {
 			}
 		}
 		return atten;
+	}
+	
+	public List<ApplyLeave> viewResponses() throws EmployeeNotFoundException {
+		try {
+			return mongotemplate.findAll(ApplyLeave.class);
+		} catch (Exception e) {
+			throw new EmployeeNotFoundException("Employees Not Found");
+		}
+	}
+	
+	public List<ApplyLeave> getAppLeavofTeam(String Id) throws EmployeeNotFoundException{
+		
+		List<ApplyLeave> attendanc = this.viewResponses();
+		List<ApplyLeave> atte = new ArrayList<>();
+		for(ApplyLeave attend : attendanc) {
+			if(Id.equals("AS")) {
+				if(attend.getId().contains("AS")) {
+					atte.add(attend);
+				}
+			}
+			else if(Id.equals("BS")) {
+				if(attend.getId().contains("BS")) {
+					atte.add(attend);
+				}	
+			}
+			else if(Id.equals("CS")) {
+				if(attend.getId().contains("CS")) {
+					atte.add(attend);
+				}
+			}
+		}
+		return atte;	
 	}
 
 	public Attendance getByEmployeeId(String Id) throws EmployeeNotFoundException {

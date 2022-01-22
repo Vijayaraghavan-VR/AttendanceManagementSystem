@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
@@ -17,17 +19,35 @@ public class AddService {
 	@Autowired
 	private MongoTemplate mongotemplate;
 	
-	public String addEmployee(Attendance attendance, String prefix) {
+	
+	public String addEmployee(Attendance attendance, String prefix) throws NumberFormatException {
 		
 			if(prefix.equals("AS")){
 			attendance.setId(prefix+ service.getCount(DatabaseSequence.getSequenceNameAS()));
+			attendance.setManager("Manager_AS");
 			}
 			else if(prefix.equals("BS")) {
 				attendance.setId(prefix+ service.getCount(DatabaseSequence.getSequenceNameBS()));
+				attendance.setManager("Manager_BS");
 			}
 			else if(prefix.equals("CS")){
 				attendance.setId(prefix+ service.getCount(DatabaseSequence.getSequenceNameCS()));
+				attendance.setManager("Manager_CS");
 			}
+			attendance.setStatus("Active");
+			attendance.setJoiningDate(LocalDate.now());
+			int n = attendance.getExperience();
+			
+	    	if(n >= 6) {
+	    		attendance.setRole("Manager");
+	    	}
+	    	else if(n >= 3 && n <= 5) {
+	    		attendance.setRole("Senior Developer");
+	    	}
+	    	else if(n <= 2 ) {
+	    		attendance.setRole("Developer");
+	    	}
+			
 			mongotemplate.save(attendance);
 		    return "Employee Added";
 	}

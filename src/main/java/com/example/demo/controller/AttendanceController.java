@@ -6,10 +6,10 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
+//import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +24,7 @@ import com.example.demo.repository.AttendanceRepository;
 import com.example.demo.service.AddService;
 import com.example.demo.service.GetEmployeeService;
 
+//@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/api/v1")
 @RestController
 public class AttendanceController {
@@ -37,11 +38,11 @@ public class AttendanceController {
 		@Autowired
 		private AttendanceRepository attendanceRepository;
 		
-//		@Autowired
-//		private MongoTemplate mongotemplate;
+		@Autowired
+		private MongoTemplate mongotemplate;
 		
 		@PostMapping("/employee")
-		public ResponseEntity<Attendance> CreateEmployee(@Valid @RequestBody Attendance attendance) {
+		public  Attendance CreateEmployee(@Valid @RequestBody Attendance attendance) {
 			
 			String tea = attendance.getTeam();
 			String prefix="_S";
@@ -59,21 +60,7 @@ public class AttendanceController {
 				prefix = "CS";
 			}
 			addservice.addEmployee(attendance, prefix);
-			attendance.setJoiningDate(LocalDate.now());
-			attendance.setStatus("Active");
-			int n = attendance.getExperience();
-			String rol="";
-	    	if(n >= 6) {
-	    		rol = "Manager";
-	    	}
-	    	else if(n >= 3 && n <= 5) {
-	    		rol = "Senior Developer";	
-	    	}
-	    	else if(n <= 2 ) {
-	    		rol= "Developer";
-	    	}
-	    	attendance.role = rol;
-			return ResponseEntity.ok(attendance);
+			return mongotemplate.save(attendance);
 		}
 		
 		

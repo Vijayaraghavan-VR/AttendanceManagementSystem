@@ -32,13 +32,14 @@ public class Attendance {
 	private int experience;
 	public String role;
 	private String status = "Active";
+	private String manager;
 	private LocalDate joiningDate = LocalDate.now();
 	private LocalDate terminatedDate;
 	private String team;
 
 
 	public Attendance(String id, String firstName, String lastName, String emailId, long phoneNumber, LocalDate dob,
-			int experience, String role, String status, LocalDate joiningDate, LocalDate terminatedDate, String team) {
+			int experience, String role, String status, String manager, LocalDate joiningDate, LocalDate terminatedDate, String team) {
 		
 		this.id = id;
 		this.firstName = firstName;
@@ -49,6 +50,7 @@ public class Attendance {
 		this.experience = experience;
 		this.role = role;
 		this.status = status;
+		this.manager = manager;
 		this.joiningDate = joiningDate;
 		this.terminatedDate = terminatedDate;
 		this.team = team;
@@ -108,26 +110,14 @@ public class Attendance {
 
 	public void setExperience(int experience) {
 		this.experience = experience;
-		this.role = setRole(experience);
 	}
 
 	public String getRole() {
 		return role;
 	}
 
-	public String setRole(int string) {
-		String rol="";
-		int strin = Integer.valueOf(string);
-    	if(strin >= 6) {
-    		rol = "Manager";
-    	}
-    	else if(strin >= 3 && strin <= 5) {
-    		rol = "Senior Developer";	
-    	}
-    	else if(strin <= 2 ) {
-    		rol= "Developer";
-    	}
-    	return rol;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public String getStatus() {
@@ -136,6 +126,14 @@ public class Attendance {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getManager() {
+		return manager;
+	}
+
+	public void setManager(String manager) {
+		this.manager = manager;
 	}
 
 	public LocalDate getJoiningDate() {
