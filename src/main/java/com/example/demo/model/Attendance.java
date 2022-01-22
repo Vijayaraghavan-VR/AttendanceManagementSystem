@@ -29,8 +29,8 @@ public class Attendance {
 	
 	private long phoneNumber;
 	private LocalDate dob;
-	private String experience;
-	private String role;
+	private int experience;
+	public String role;
 	private String status = "Active";
 	private LocalDate joiningDate = LocalDate.now();
 	private LocalDate terminatedDate;
@@ -38,7 +38,7 @@ public class Attendance {
 
 
 	public Attendance(String id, String firstName, String lastName, String emailId, long phoneNumber, LocalDate dob,
-			String experience, String role, String status, LocalDate joiningDate, LocalDate terminatedDate, String team) {
+			int experience, String role, String status, LocalDate joiningDate, LocalDate terminatedDate, String team) {
 		
 		this.id = id;
 		this.firstName = firstName;
@@ -102,11 +102,11 @@ public class Attendance {
 		this.dob = dob;
 	}
 
-	public String getExperience() {
+	public int getExperience() {
 		return experience;
 	}
 
-	public void setExperience(String experience) {
+	public void setExperience(int experience) {
 		this.experience = experience;
 		this.role = setRole(experience);
 	}
@@ -115,7 +115,7 @@ public class Attendance {
 		return role;
 	}
 
-	public String setRole(String string) {
+	public String setRole(int string) {
 		String rol="";
 		int strin = Integer.valueOf(string);
     	if(strin >= 6) {

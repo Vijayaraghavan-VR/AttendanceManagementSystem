@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,11 @@ public class ApplyLeaveController {
 	
 	@Autowired
 	private LeaveRepository levrepository;
+	
+//	@GetMapping("/home")
+//	public String home() {
+//		return ("<h1>Welcome</h1");
+//	}
 	
 	@PostMapping("/applyLeave")
 	public @Valid String InstatiatingLeave(@Valid @RequestBody LeaveTypes leaves) throws EmployeeNotFoundException{
