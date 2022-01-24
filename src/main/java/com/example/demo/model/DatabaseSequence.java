@@ -14,11 +14,6 @@ public class DatabaseSequence {
 	private String id;
 	private int count;
 
-	public DatabaseSequence() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	public DatabaseSequence(String id, int count) {
 		super();
 		this.id = id;

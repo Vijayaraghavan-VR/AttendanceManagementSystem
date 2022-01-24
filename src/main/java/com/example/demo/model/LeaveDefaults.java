@@ -7,11 +7,7 @@ public class LeaveDefaults {
 	private int privilegeLeave = 1;
 	private int lossOfPay = 2;
 	private int onDuty = 3;
-	
-	public LeaveDefaults() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+
 
 	public LeaveDefaults(int paidLeave, int medicalLeave, int privilegeLeave, int lossOfPay, int onDuty) {
 		super();
@@ -22,6 +18,11 @@ public class LeaveDefaults {
 		this.onDuty = onDuty;
 	}
 
+	public LeaveDefaults() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	public int getPaidLeave() {
 		return paidLeave;
 	}

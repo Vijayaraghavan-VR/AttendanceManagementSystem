@@ -13,11 +13,12 @@ public class LeaveTypes {
 	private int privilegeLeave;
 	private int lossOfPay;
 
+	
 	public LeaveTypes() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public LeaveTypes(String id, String firstName, int paidLeave, int medicalLeave, int privilegeLeave, int lossOfPay, int onDuty) {
 		super();
 		this.id = id;

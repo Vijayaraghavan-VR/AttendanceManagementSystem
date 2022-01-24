@@ -53,7 +53,6 @@ public class AddService {
 	}
 	
 	public String addWorkHrs(WorkingHours workhrs) {
-
 		mongotemplate.save(workhrs);
 	    return "Employee Added";
 	}

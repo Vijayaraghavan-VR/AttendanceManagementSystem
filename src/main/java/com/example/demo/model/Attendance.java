@@ -30,6 +30,7 @@ public class Attendance {
 	private long phoneNumber;
 	private LocalDate dob;
 	private int experience;
+
 	public String role;
 	private String status = "Active";
 	private String manager;
@@ -37,6 +38,24 @@ public class Attendance {
 	private LocalDate terminatedDate;
 	private String team;
 
+	public Attendance() {
+		super();
+	}
+	
+	public Attendance( String firstName, String lastName, String emailId, long phoneNumber, LocalDate dob,
+			int experience, String team) {
+		
+
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailId = emailId;
+		this.phoneNumber = phoneNumber;
+		this.dob = dob;
+		this.experience = experience;
+		this.team = team;
+	}
+	
+	
 
 	public Attendance(String id, String firstName, String lastName, String emailId, long phoneNumber, LocalDate dob,
 			int experience, String role, String status, String manager, LocalDate joiningDate, LocalDate terminatedDate, String team) {

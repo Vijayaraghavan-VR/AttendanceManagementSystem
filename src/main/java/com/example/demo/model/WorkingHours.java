@@ -15,7 +15,7 @@ public class WorkingHours {
 	private LocalDateTime checkOut;
 	
 	private List<Time> inDetailedTimings;
-	
+
 	public WorkingHours() {
 		super();
 		// TODO Auto-generated constructor stub

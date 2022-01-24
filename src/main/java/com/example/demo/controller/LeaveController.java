@@ -14,9 +14,6 @@ import com.example.demo.model.LeaveTypes;
 import com.example.demo.repository.AttendanceRepository;
 import com.example.demo.repository.LeaveRepository;
 
-
-
-
 @RequestMapping("/api/v1")
 @RestController
 public class LeaveController {

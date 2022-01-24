@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,18 +42,20 @@ public class WorkingHoursController {
 	private MongoTemplate mongotemplate;
 	
 	@PostMapping("/time")
-	public @Valid WorkingHours CreateWorkHours(@Valid @RequestBody WorkingHours workhrs) throws EmployeeNotFoundException {
-		String employeeId = workhrs.getId();
+	public @Valid WorkingHours createWorkHours(@PathVariable(value = "Id") String employeeId) throws EmployeeNotFoundException {
+		WorkingHours workhrs = new WorkingHours();
+		workhrs.setId(employeeId);
 		Attendance attendance = attendancerepository.findById(employeeId)
 				.orElseThrow(() -> new EmployeeNotFoundException("Employee not found for this id :: " + employeeId));
 		
 		workhrs.setFirstName(attendance.getFirstName());
 		addservice.addWorkHrs(workhrs);
+		workhrs.setCheckIn(LocalDateTime.now());
 		return mongotemplate.save(workhrs);
 	}
 	
 	@PutMapping("/time/{Id}")
-	public ResponseEntity<WorkingHours> updateEmployee(@PathVariable(value = "Id") String employeeId) throws EmployeeNotFoundException {
+	public ResponseEntity<WorkingHours> updateEmployeeWorkHours(@PathVariable(value = "Id") String employeeId) throws EmployeeNotFoundException {
 		
 		WorkingHours workhours = workHoursRepository.findById(employeeId)
 				.orElseThrow(() -> new EmployeeNotFoundException("Employee not found for this id :: " + employeeId));  

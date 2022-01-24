@@ -82,7 +82,6 @@ public class GetEmployeeService {
 	}
 
 	public Attendance getByEmployeeId(String Id) throws EmployeeNotFoundException {
-		// TODO Auto-generated method stub
 		Attendance attendance = mongotemplate.findById(Id, Attendance.class);
 
 		if (attendance != null) {
