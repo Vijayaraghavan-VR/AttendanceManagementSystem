@@ -11,7 +11,7 @@ public class WorkingHours {
 	
 	private String id;
 	private String firstName;
-<span class="pc" id="L14">	private LocalDateTime checkIn = LocalDateTime.now();</span>
+<span class="fc" id="L14">	private LocalDateTime checkIn = LocalDateTime.now();</span>
 	private LocalDateTime checkOut;
 	
 	private List&lt;Time&gt; inDetailedTimings;
@@ -22,21 +22,21 @@ public class WorkingHours {
 <span class="fc" id="L22">	}</span>
 
 	public WorkingHours(String id, String firstName, LocalDateTime checkIn, LocalDateTime checkOut, List&lt;Time&gt; inDetailedTimings) {
-<span class="nc" id="L25">		super();</span>
-<span class="nc" id="L26">		this.id = id;</span>
-<span class="nc" id="L27">		this.firstName = firstName;</span>
-<span class="nc" id="L28">		this.checkIn = checkIn;</span>
-<span class="nc" id="L29">		this.checkOut = checkOut;</span>
-<span class="nc" id="L30">		this.inDetailedTimings = inDetailedTimings;</span>
-<span class="nc" id="L31">	}</span>
+<span class="fc" id="L25">		super();</span>
+<span class="fc" id="L26">		this.id = id;</span>
+<span class="fc" id="L27">		this.firstName = firstName;</span>
+<span class="fc" id="L28">		this.checkIn = checkIn;</span>
+<span class="fc" id="L29">		this.checkOut = checkOut;</span>
+<span class="fc" id="L30">		this.inDetailedTimings = inDetailedTimings;</span>
+<span class="fc" id="L31">	}</span>
 	
 	public String getId() {
 <span class="nc" id="L34">		return id;</span>
 	}
 
 	public void setId(String id) {
-<span class="nc" id="L38">		this.id = id;</span>
-<span class="nc" id="L39">	}</span>
+<span class="fc" id="L38">		this.id = id;</span>
+<span class="fc" id="L39">	}</span>
 
 
 	public String getFirstName() {
@@ -44,16 +44,16 @@ public class WorkingHours {
 	}
 
 	public void setFirstName(String firstName) {
-<span class="nc" id="L47">		this.firstName = firstName;</span>
-<span class="nc" id="L48">	}</span>
+<span class="fc" id="L47">		this.firstName = firstName;</span>
+<span class="fc" id="L48">	}</span>
 
 	public LocalDateTime getCheckIn() {
 <span class="fc" id="L51">		return checkIn;</span>
 	}
 
 	public void setCheckIn(LocalDateTime checkIn) {
-<span class="nc" id="L55">		this.checkIn = checkIn;</span>
-<span class="nc" id="L56">	}</span>
+<span class="fc" id="L55">		this.checkIn = checkIn;</span>
+<span class="fc" id="L56">	}</span>
 
 	public LocalDateTime getCheckOut() {
 <span class="nc" id="L59">		return checkOut;</span>
@@ -70,12 +70,6 @@ public class WorkingHours {
 	public void setInDetailedTimings(List&lt;Time&gt; inDetailedTimings) {
 <span class="fc" id="L71">		this.inDetailedTimings = inDetailedTimings;</span>
 <span class="fc" id="L72">	}</span>
-
-	@Override
-	public String toString() {
-<span class="nc" id="L76">		return &quot;WorkingHours [id=&quot; + id + &quot;, checkIn=&quot; + checkIn + &quot;, checkOut=&quot; + checkOut + &quot;, inDetailedTimings=&quot;</span>
-				+ inDetailedTimings + &quot;]&quot;;
-	}
 	
 	
 

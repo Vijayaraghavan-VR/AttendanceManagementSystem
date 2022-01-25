@@ -29,20 +29,20 @@ public class User {
   @Size(max = 120)
   private String password;
 
-<span class="nc" id="L32">  @DBRef</span>
+<span class="fc" id="L32">  @DBRef</span>
   private Set&lt;Role&gt; roles = new HashSet&lt;&gt;();
 
-<span class="nc" id="L35">  public User() {</span>
-<span class="nc" id="L36">  }</span>
+<span class="fc" id="L35">  public User() {</span>
+<span class="fc" id="L36">  }</span>
 
-<span class="nc" id="L38">  public User(String username, String email, String password) {</span>
-<span class="nc" id="L39">    this.username = username;</span>
-<span class="nc" id="L40">    this.email = email;</span>
-<span class="nc" id="L41">    this.password = password;</span>
-<span class="nc" id="L42">  }</span>
+<span class="fc" id="L38">  public User(String username, String email, String password) {</span>
+<span class="fc" id="L39">    this.username = username;</span>
+<span class="fc" id="L40">    this.email = email;</span>
+<span class="fc" id="L41">    this.password = password;</span>
+<span class="fc" id="L42">  }</span>
 
   public String getId() {
-<span class="nc" id="L45">    return id;</span>
+<span class="fc" id="L45">    return id;</span>
   }
 
   public void setId(String id) {
@@ -50,15 +50,15 @@ public class User {
 <span class="nc" id="L50">  }</span>
 
   public String getUsername() {
-<span class="nc" id="L53">    return username;</span>
+<span class="fc" id="L53">    return username;</span>
   }
 
   public void setUsername(String username) {
-<span class="nc" id="L57">    this.username = username;</span>
-<span class="nc" id="L58">  }</span>
+<span class="fc" id="L57">    this.username = username;</span>
+<span class="fc" id="L58">  }</span>
 
   public String getEmail() {
-<span class="nc" id="L61">    return email;</span>
+<span class="fc" id="L61">    return email;</span>
   }
 
   public void setEmail(String email) {
@@ -66,7 +66,7 @@ public class User {
 <span class="nc" id="L66">  }</span>
 
   public String getPassword() {
-<span class="nc" id="L69">    return password;</span>
+<span class="fc" id="L69">    return password;</span>
   }
 
   public void setPassword(String password) {
@@ -74,11 +74,11 @@ public class User {
 <span class="nc" id="L74">  }</span>
 
   public Set&lt;Role&gt; getRoles() {
-<span class="nc" id="L77">    return roles;</span>
+<span class="fc" id="L77">    return roles;</span>
   }
 
   public void setRoles(Set&lt;Role&gt; roles) {
-<span class="nc" id="L81">    this.roles = roles;</span>
-<span class="nc" id="L82">  }</span>
+<span class="fc" id="L81">    this.roles = roles;</span>
+<span class="fc" id="L82">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -23,14 +23,14 @@ import io.jsonwebtoken.*;
 
 	public String generateJwtToken(Authentication authentication) {
 
-<span class="nc" id="L26">		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();</span>
+<span class="fc" id="L26">		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();</span>
 
-<span class="nc" id="L28">		return Jwts.builder()</span>
-<span class="nc" id="L29">				.setSubject((userPrincipal.getUsername()))</span>
-<span class="nc" id="L30">				.setIssuedAt(new Date())</span>
-<span class="nc" id="L31">				.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))</span>
-<span class="nc" id="L32">				.signWith(SignatureAlgorithm.HS512, jwtSecret)</span>
-<span class="nc" id="L33">				.compact();</span>
+<span class="fc" id="L28">		return Jwts.builder()</span>
+<span class="fc" id="L29">				.setSubject((userPrincipal.getUsername()))</span>
+<span class="fc" id="L30">				.setIssuedAt(new Date())</span>
+<span class="fc" id="L31">				.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))</span>
+<span class="fc" id="L32">				.signWith(SignatureAlgorithm.HS512, jwtSecret)</span>
+<span class="fc" id="L33">				.compact();</span>
 	}
 
 	public String getUserNameFromJwtToken(String token) {

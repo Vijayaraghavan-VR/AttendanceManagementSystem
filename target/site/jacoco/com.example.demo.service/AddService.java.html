@@ -23,27 +23,27 @@ import com.example.demo.model.WorkingHours;
 	
 	public String addEmployee(Attendance attendance, String prefix) throws NumberFormatException {
 		
-<span class="pc bpc" id="L26" title="1 of 2 branches missed.">			if(prefix.equals(&quot;AS&quot;)){</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">			if(prefix.equals(&quot;AS&quot;)){</span>
 <span class="fc" id="L27">			attendance.setId(prefix+ service.getCount(DatabaseSequence.getSequenceNameAS()));</span>
 <span class="fc" id="L28">			attendance.setManager(&quot;Manager_AS&quot;);</span>
 			}
-<span class="nc bnc" id="L30" title="All 2 branches missed.">			else if(prefix.equals(&quot;BS&quot;)) {</span>
-<span class="nc" id="L31">				attendance.setId(prefix+ service.getCount(DatabaseSequence.getSequenceNameBS()));</span>
-<span class="nc" id="L32">				attendance.setManager(&quot;Manager_BS&quot;);</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">			else if(prefix.equals(&quot;BS&quot;)) {</span>
+<span class="fc" id="L31">				attendance.setId(prefix+ service.getCount(DatabaseSequence.getSequenceNameBS()));</span>
+<span class="fc" id="L32">				attendance.setManager(&quot;Manager_BS&quot;);</span>
 			}
-<span class="nc bnc" id="L34" title="All 2 branches missed.">			else if(prefix.equals(&quot;CS&quot;)){</span>
-<span class="nc" id="L35">				attendance.setId(prefix+ service.getCount(DatabaseSequence.getSequenceNameCS()));</span>
-<span class="nc" id="L36">				attendance.setManager(&quot;Manager_CS&quot;);</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">			else if(prefix.equals(&quot;CS&quot;)){</span>
+<span class="fc" id="L35">				attendance.setId(prefix+ service.getCount(DatabaseSequence.getSequenceNameCS()));</span>
+<span class="fc" id="L36">				attendance.setManager(&quot;Manager_CS&quot;);</span>
 			}
 <span class="fc" id="L38">			attendance.setStatus(&quot;Active&quot;);</span>
 <span class="fc" id="L39">			attendance.setJoiningDate(LocalDate.now());</span>
 <span class="fc" id="L40">			int n = attendance.getExperience();</span>
 			
-<span class="pc bpc" id="L42" title="1 of 2 branches missed.">	    	if(n &gt;= 6) {</span>
-<span class="nc" id="L43">	    		attendance.setRole(&quot;Manager&quot;);</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">	    	if(n &gt;= 6) {</span>
+<span class="fc" id="L43">	    		attendance.setRole(&quot;Manager&quot;);</span>
 	    	}
-<span class="pc bpc" id="L45" title="3 of 4 branches missed.">	    	else if(n &gt;= 3 &amp;&amp; n &lt;= 5) {</span>
-<span class="nc" id="L46">	    		attendance.setRole(&quot;Senior Developer&quot;);</span>
+<span class="pc bpc" id="L45" title="1 of 4 branches missed.">	    	else if(n &gt;= 3 &amp;&amp; n &lt;= 5) {</span>
+<span class="fc" id="L46">	    		attendance.setRole(&quot;Senior Developer&quot;);</span>
 	    	}
 <span class="pc bpc" id="L48" title="1 of 2 branches missed.">	    	else if(n &lt;= 2 ) {</span>
 <span class="fc" id="L49">	    		attendance.setRole(&quot;Developer&quot;);</span>
@@ -54,9 +54,9 @@ import com.example.demo.model.WorkingHours;
 	}
 	
 	public String addWorkHrs(WorkingHours workhrs) {
-<span class="nc" id="L57">		workhrs.setCheckIn(LocalDateTime.now());</span>
-<span class="nc" id="L58">		mongotemplate.save(workhrs);</span>
-<span class="nc" id="L59">	    return &quot;Employee Added&quot;;</span>
+<span class="fc" id="L57">		workhrs.setCheckIn(LocalDateTime.now());</span>
+<span class="fc" id="L58">		mongotemplate.save(workhrs);</span>
+<span class="fc" id="L59">	    return &quot;Employee Added&quot;;</span>
 	}
 	
 	public int getTeamCount(String Id) {

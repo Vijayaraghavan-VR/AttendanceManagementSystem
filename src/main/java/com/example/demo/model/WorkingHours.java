@@ -70,12 +70,6 @@ public class WorkingHours {
 	public void setInDetailedTimings(List<Time> inDetailedTimings) {
 		this.inDetailedTimings = inDetailedTimings;
 	}
-
-	@Override
-	public String toString() {
-		return "WorkingHours [id=" + id + ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", inDetailedTimings="
-				+ inDetailedTimings + "]";
-	}
 	
 	
 

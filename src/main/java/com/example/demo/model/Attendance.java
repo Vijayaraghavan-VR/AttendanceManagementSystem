@@ -54,26 +54,6 @@ public class Attendance {
 		this.experience = experience;
 		this.team = team;
 	}
-	
-	
-
-	public Attendance(String id, String firstName, String lastName, String emailId, long phoneNumber, LocalDate dob,
-			int experience, String role, String status, String manager, LocalDate joiningDate, LocalDate terminatedDate, String team) {
-		
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.emailId = emailId;
-		this.phoneNumber = phoneNumber;
-		this.dob = dob;
-		this.experience = experience;
-		this.role = role;
-		this.status = status;
-		this.manager = manager;
-		this.joiningDate = joiningDate;
-		this.terminatedDate = terminatedDate;
-		this.team = team;
-	}
 
 	public String getId() {
 		return id;
@@ -178,14 +158,4 @@ public class Attendance {
 	public void setTeam(String team) {
 		this.team = team;
 	}
-
-	@Override
-	public String toString() {
-		return "Attendance [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId
-				+ ", phoneNumber=" + phoneNumber + ", dob=" + dob + ", experience=" + experience + ", role=" + role
-				+ ", status=" + status + ", joiningDate=" + joiningDate + ", terminatedDate=" + terminatedDate
-				+ ", team=" + team + "]";
-	}
-	
-	
 }

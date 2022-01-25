@@ -43,15 +43,15 @@ import com.example.demo.service.AddService;
 	
 	@PostMapping(&quot;/time&quot;)
 	public @Valid WorkingHours createWorkHours(@PathVariable(value = &quot;Id&quot;) String employeeId) throws EmployeeNotFoundException {
-<span class="nc" id="L46">		WorkingHours workhrs = new WorkingHours();</span>
-<span class="nc" id="L47">		workhrs.setId(employeeId);</span>
-<span class="nc" id="L48">		Attendance attendance = attendancerepository.findById(employeeId)</span>
-<span class="nc" id="L49">				.orElseThrow(() -&gt; new EmployeeNotFoundException(&quot;Employee not found for this id :: &quot; + employeeId));</span>
+<span class="fc" id="L46">		WorkingHours workhrs = new WorkingHours();</span>
+<span class="fc" id="L47">		workhrs.setId(employeeId);</span>
+<span class="fc" id="L48">		Attendance attendance = attendancerepository.findById(employeeId)</span>
+<span class="pc" id="L49">				.orElseThrow(() -&gt; new EmployeeNotFoundException(&quot;Employee not found for this id :: &quot; + employeeId));</span>
 		
-<span class="nc" id="L51">		workhrs.setFirstName(attendance.getFirstName());</span>
-<span class="nc" id="L52">		addservice.addWorkHrs(workhrs);</span>
+<span class="fc" id="L51">		workhrs.setFirstName(attendance.getFirstName());</span>
+<span class="fc" id="L52">		addservice.addWorkHrs(workhrs);</span>
 		
-<span class="nc" id="L54">		return mongotemplate.save(workhrs);</span>
+<span class="fc" id="L54">		return mongotemplate.save(workhrs);</span>
 	}
 	
 	@PutMapping(&quot;/time/{Id}&quot;)

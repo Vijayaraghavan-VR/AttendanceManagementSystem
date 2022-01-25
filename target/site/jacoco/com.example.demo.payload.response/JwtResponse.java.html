@@ -4,19 +4,19 @@ import java.util.List;
 
 public class JwtResponse {
 	private String token;
-<span class="nc" id="L7">	private String type = &quot;Bearer&quot;;</span>
+<span class="fc" id="L7">	private String type = &quot;Bearer&quot;;</span>
 	private String id;
 	private String username;
 	private String email;
 	private List&lt;String&gt; roles;
 
-<span class="nc" id="L13">	public JwtResponse(String accessToken, String id, String username, String email, List&lt;String&gt; roles) {</span>
-<span class="nc" id="L14">		this.token = accessToken;</span>
-<span class="nc" id="L15">		this.id = id;</span>
-<span class="nc" id="L16">		this.username = username;</span>
-<span class="nc" id="L17">		this.email = email;</span>
-<span class="nc" id="L18">		this.roles = roles;</span>
-<span class="nc" id="L19">	}</span>
+<span class="fc" id="L13">	public JwtResponse(String accessToken, String id, String username, String email, List&lt;String&gt; roles) {</span>
+<span class="fc" id="L14">		this.token = accessToken;</span>
+<span class="fc" id="L15">		this.id = id;</span>
+<span class="fc" id="L16">		this.username = username;</span>
+<span class="fc" id="L17">		this.email = email;</span>
+<span class="fc" id="L18">		this.roles = roles;</span>
+<span class="fc" id="L19">	}</span>
 
 	public String getAccessToken() {
 <span class="nc" id="L22">		return token;</span>

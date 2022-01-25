@@ -18,10 +18,10 @@ import com.example.demo.repository.UserRepository;
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-<span class="nc" id="L21">		User user = userRepository.findByUsername(username)</span>
-<span class="nc" id="L22">				.orElseThrow(() -&gt; new UsernameNotFoundException(&quot;User Not Found with username: &quot; + username));</span>
+<span class="fc" id="L21">		User user = userRepository.findByUsername(username)</span>
+<span class="pc" id="L22">				.orElseThrow(() -&gt; new UsernameNotFoundException(&quot;User Not Found with username: &quot; + username));</span>
 
-<span class="nc" id="L24">		return UserDetailsImpl.build(user);</span>
+<span class="fc" id="L24">		return UserDetailsImpl.build(user);</span>
 	}
 
 }

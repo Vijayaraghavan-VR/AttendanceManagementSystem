@@ -54,76 +54,76 @@ import com.example.demo.security.services.UserDetailsImpl;
 	@PostMapping(&quot;/signin&quot;)
 	public ResponseEntity&lt;?&gt; authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-<span class="nc" id="L57">		Authentication authentication = authenticationManager.authenticate(</span>
-<span class="nc" id="L58">				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));</span>
+<span class="fc" id="L57">		Authentication authentication = authenticationManager.authenticate(</span>
+<span class="fc" id="L58">				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));</span>
 
-<span class="nc" id="L60">		SecurityContextHolder.getContext().setAuthentication(authentication);</span>
-<span class="nc" id="L61">		String jwt = jwtUtils.generateJwtToken(authentication);</span>
+<span class="fc" id="L60">		SecurityContextHolder.getContext().setAuthentication(authentication);</span>
+<span class="fc" id="L61">		String jwt = jwtUtils.generateJwtToken(authentication);</span>
 		
-<span class="nc" id="L63">		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();		</span>
-<span class="nc" id="L64">		List&lt;String&gt; roles = userDetails.getAuthorities().stream()</span>
-<span class="nc" id="L65">				.map(item -&gt; item.getAuthority())</span>
-<span class="nc" id="L66">				.collect(Collectors.toList());</span>
+<span class="fc" id="L63">		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();		</span>
+<span class="fc" id="L64">		List&lt;String&gt; roles = userDetails.getAuthorities().stream()</span>
+<span class="fc" id="L65">				.map(item -&gt; item.getAuthority())</span>
+<span class="fc" id="L66">				.collect(Collectors.toList());</span>
 
-<span class="nc" id="L68">		return ResponseEntity.ok(new JwtResponse(jwt, </span>
-<span class="nc" id="L69">												 userDetails.getId(), </span>
-<span class="nc" id="L70">												 userDetails.getUsername(), </span>
-<span class="nc" id="L71">												 userDetails.getEmail(), </span>
+<span class="fc" id="L68">		return ResponseEntity.ok(new JwtResponse(jwt, </span>
+<span class="fc" id="L69">												 userDetails.getId(), </span>
+<span class="fc" id="L70">												 userDetails.getUsername(), </span>
+<span class="fc" id="L71">												 userDetails.getEmail(), </span>
 												 roles));
 	}
 
 	@PostMapping(&quot;/signup&quot;)
 	public ResponseEntity&lt;?&gt; registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-<span class="nc bnc" id="L77" title="All 2 branches missed.">		if (userRepository.existsByUsername(signUpRequest.getUsername())) {</span>
-<span class="nc" id="L78">			return ResponseEntity</span>
-<span class="nc" id="L79">					.badRequest()</span>
-<span class="nc" id="L80">					.body(new MessageResponse(&quot;Error: Username is already taken!&quot;));</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">		if (userRepository.existsByUsername(signUpRequest.getUsername())) {</span>
+<span class="fc" id="L78">			return ResponseEntity</span>
+<span class="fc" id="L79">					.badRequest()</span>
+<span class="fc" id="L80">					.body(new MessageResponse(&quot;Error: Username is already taken!&quot;));</span>
 		}
 
-<span class="nc bnc" id="L83" title="All 2 branches missed.">		if (userRepository.existsByEmail(signUpRequest.getEmail())) {</span>
-<span class="nc" id="L84">			return ResponseEntity</span>
-<span class="nc" id="L85">					.badRequest()</span>
-<span class="nc" id="L86">					.body(new MessageResponse(&quot;Error: Email is already in use!&quot;));</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">		if (userRepository.existsByEmail(signUpRequest.getEmail())) {</span>
+<span class="fc" id="L84">			return ResponseEntity</span>
+<span class="fc" id="L85">					.badRequest()</span>
+<span class="fc" id="L86">					.body(new MessageResponse(&quot;Error: Email is already in use!&quot;));</span>
 		}
 
-<span class="nc" id="L89">		User user = new User(signUpRequest.getUsername(), </span>
-<span class="nc" id="L90">							 signUpRequest.getEmail(),</span>
-<span class="nc" id="L91">							 encoder.encode(signUpRequest.getPassword()));</span>
+<span class="fc" id="L89">		User user = new User(signUpRequest.getUsername(), </span>
+<span class="fc" id="L90">							 signUpRequest.getEmail(),</span>
+<span class="fc" id="L91">							 encoder.encode(signUpRequest.getPassword()));</span>
 
-<span class="nc" id="L93">		Set&lt;String&gt; strRoles = signUpRequest.getRoles();</span>
-<span class="nc" id="L94">		Set&lt;Role&gt; roles = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L93">		Set&lt;String&gt; strRoles = signUpRequest.getRoles();</span>
+<span class="fc" id="L94">		Set&lt;Role&gt; roles = new HashSet&lt;&gt;();</span>
 
-<span class="nc bnc" id="L96" title="All 2 branches missed.">		if (strRoles == null) {</span>
-<span class="nc" id="L97">			Role userRole = roleRepository.findByName(ERole.ROLE_USER)</span>
-<span class="nc" id="L98">					.orElseThrow(() -&gt; new RuntimeException(&quot;Error: Role is not found.&quot;));</span>
-<span class="nc" id="L99">			roles.add(userRole);</span>
-<span class="nc" id="L100">		} else {</span>
-<span class="nc" id="L101">			strRoles.forEach(role -&gt; {</span>
-<span class="nc bnc" id="L102" title="All 3 branches missed.">				switch (role) {</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">		if (strRoles == null) {</span>
+<span class="fc" id="L97">			Role userRole = roleRepository.findByName(ERole.ROLE_USER)</span>
+<span class="pc" id="L98">					.orElseThrow(() -&gt; new RuntimeException(&quot;Error: Role is not found.&quot;));</span>
+<span class="fc" id="L99">			roles.add(userRole);</span>
+<span class="fc" id="L100">		} else {</span>
+<span class="fc" id="L101">			strRoles.forEach(role -&gt; {</span>
+<span class="pc bpc" id="L102" title="1 of 3 branches missed.">				switch (role) {</span>
 				case &quot;admin&quot;:
-<span class="nc" id="L104">					Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)</span>
-<span class="nc" id="L105">							.orElseThrow(() -&gt; new RuntimeException(&quot;Error: Role is not found.&quot;));</span>
-<span class="nc" id="L106">					roles.add(adminRole);</span>
+<span class="fc" id="L104">					Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)</span>
+<span class="pc" id="L105">							.orElseThrow(() -&gt; new RuntimeException(&quot;Error: Role is not found.&quot;));</span>
+<span class="fc" id="L106">					roles.add(adminRole);</span>
 
-<span class="nc" id="L108">					break;</span>
+<span class="fc" id="L108">					break;</span>
 				case &quot;manager&quot;:
-<span class="nc" id="L110">					Role modRole = roleRepository.findByName(ERole.ROLE_MANAGER)</span>
-<span class="nc" id="L111">							.orElseThrow(() -&gt; new RuntimeException(&quot;Error: Role is not found.&quot;));</span>
-<span class="nc" id="L112">					roles.add(modRole);</span>
+<span class="fc" id="L110">					Role modRole = roleRepository.findByName(ERole.ROLE_MANAGER)</span>
+<span class="pc" id="L111">							.orElseThrow(() -&gt; new RuntimeException(&quot;Error: Role is not found.&quot;));</span>
+<span class="fc" id="L112">					roles.add(modRole);</span>
 
-<span class="nc" id="L114">					break;</span>
+<span class="fc" id="L114">					break;</span>
 				default:
 <span class="nc" id="L116">					Role userRole = roleRepository.findByName(ERole.ROLE_USER)</span>
 <span class="nc" id="L117">							.orElseThrow(() -&gt; new RuntimeException(&quot;Error: Role is not found.&quot;));</span>
 <span class="nc" id="L118">					roles.add(userRole);</span>
 				}
-<span class="nc" id="L120">			});</span>
+<span class="fc" id="L120">			});</span>
 		}
 
-<span class="nc" id="L123">		user.setRoles(roles);</span>
-<span class="nc" id="L124">		userRepository.save(user);</span>
+<span class="fc" id="L123">		user.setRoles(roles);</span>
+<span class="fc" id="L124">		userRepository.save(user);</span>
 
-<span class="nc" id="L126">		return ResponseEntity.ok(new MessageResponse(&quot;User registered successfully!&quot;));</span>
+<span class="fc" id="L126">		return ResponseEntity.ok(new MessageResponse(&quot;User registered successfully!&quot;));</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
