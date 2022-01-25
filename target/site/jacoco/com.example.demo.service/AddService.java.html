@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AddService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AttendanceManagementSystem</a> &gt; <a href="index.source.html" class="el_package">com.example.demo.service</a> &gt; <span class="el_source">AddService.java</span></div><h1>AddService.java</h1><pre class="source lang-java linenums">package com.example.demo.service;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.model.Attendance;
+import com.example.demo.model.DatabaseSequence;
+import com.example.demo.model.WorkingHours;
+
+@Service
+<span class="fc" id="L15">public class AddService {</span>
+	
+	@Autowired
+	private SequenceGeneratorService service;
+
+	@Autowired
+	private MongoTemplate mongotemplate;
+	
+	
+	public String addEmployee(Attendance attendance, String prefix) throws NumberFormatException {
+		
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">			if(prefix.equals(&quot;AS&quot;)){</span>
+<span class="fc" id="L27">			attendance.setId(prefix+ service.getCount(DatabaseSequence.getSequenceNameAS()));</span>
+<span class="fc" id="L28">			attendance.setManager(&quot;Manager_AS&quot;);</span>
+			}
+<span class="nc bnc" id="L30" title="All 2 branches missed.">			else if(prefix.equals(&quot;BS&quot;)) {</span>
+<span class="nc" id="L31">				attendance.setId(prefix+ service.getCount(DatabaseSequence.getSequenceNameBS()));</span>
+<span class="nc" id="L32">				attendance.setManager(&quot;Manager_BS&quot;);</span>
+			}
+<span class="nc bnc" id="L34" title="All 2 branches missed.">			else if(prefix.equals(&quot;CS&quot;)){</span>
+<span class="nc" id="L35">				attendance.setId(prefix+ service.getCount(DatabaseSequence.getSequenceNameCS()));</span>
+<span class="nc" id="L36">				attendance.setManager(&quot;Manager_CS&quot;);</span>
+			}
+<span class="fc" id="L38">			attendance.setStatus(&quot;Active&quot;);</span>
+<span class="fc" id="L39">			attendance.setJoiningDate(LocalDate.now());</span>
+<span class="fc" id="L40">			int n = attendance.getExperience();</span>
+			
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">	    	if(n &gt;= 6) {</span>
+<span class="nc" id="L43">	    		attendance.setRole(&quot;Manager&quot;);</span>
+	    	}
+<span class="pc bpc" id="L45" title="3 of 4 branches missed.">	    	else if(n &gt;= 3 &amp;&amp; n &lt;= 5) {</span>
+<span class="nc" id="L46">	    		attendance.setRole(&quot;Senior Developer&quot;);</span>
+	    	}
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">	    	else if(n &lt;= 2 ) {</span>
+<span class="fc" id="L49">	    		attendance.setRole(&quot;Developer&quot;);</span>
+	    	}
+			
+<span class="fc" id="L52">			mongotemplate.save(attendance);</span>
+<span class="fc" id="L53">		    return &quot;Employee Added&quot;;</span>
+	}
+	
+	public String addWorkHrs(WorkingHours workhrs) {
+<span class="nc" id="L57">		workhrs.setCheckIn(LocalDateTime.now());</span>
+<span class="nc" id="L58">		mongotemplate.save(workhrs);</span>
+<span class="nc" id="L59">	    return &quot;Employee Added&quot;;</span>
+	}
+	
+	public int getTeamCount(String Id) {
+<span class="fc" id="L63">		int n = 0;</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">		if(Id.equals(&quot;AS&quot;)){</span>
+<span class="fc" id="L65">			n = (service.getCount(DatabaseSequence.getSequenceNameAS())) - 1;</span>
+		}
+<span class="fc bfc" id="L67" title="All 2 branches covered.">		else if(Id.equals(&quot;BS&quot;)) {</span>
+<span class="fc" id="L68">			n = (service.getCount(DatabaseSequence.getSequenceNameBS())) - 1;</span>
+		}
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">		else if(Id.equals(&quot;CS&quot;)) {</span>
+<span class="fc" id="L71">			n = (service.getCount(DatabaseSequence.getSequenceNameCS())) - 1;</span>
+		}
+<span class="fc" id="L73">		return n;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ApplyLeaveService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AttendanceManagementSystem</a> &gt; <a href="index.source.html" class="el_package">com.example.demo.service</a> &gt; <span class="el_source">ApplyLeaveService.java</span></div><h1>ApplyLeaveService.java</h1><pre class="source lang-java linenums">package com.example.demo.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.exception.EmployeeNotFoundException;
+import com.example.demo.model.ApplyLeave;
+import com.example.demo.model.LeaveDefaults;
+import com.example.demo.model.LeaveTypes;
+import com.example.demo.repository.ApplyLeaveRepository;
+import com.example.demo.repository.LeaveRepository;
+
+
+@Service
+<span class="fc" id="L18">public class ApplyLeaveService {</span>
+	
+	@Autowired
+	private MongoTemplate mongotemplate;
+	
+	@Autowired
+	private LeaveRepository levrepo;
+	
+	@Autowired
+	private ApplyLeaveRepository applylevrepo;
+	
+	
+	
+	public String approveLeave(String Id, LeaveDefaults lev) throws EmployeeNotFoundException {
+<span class="fc" id="L32">		String result=&quot;&quot;;</span>
+<span class="fc" id="L33">		LeaveTypes reqEntity = mongotemplate.findById(Id, LeaveTypes.class);</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">		if(reqEntity != null) {</span>
+<span class="fc" id="L35">			ApplyLeave respon = applylevrepo.findById(Id)</span>
+<span class="pc" id="L36">					.orElseThrow(() -&gt; new EmployeeNotFoundException(&quot;Employee not found for this id :: &quot; + Id));</span>
+<span class="fc" id="L37">			String reason = respon.getReason();</span>
+<span class="fc" id="L38">			LeaveTypes applyleav = levrepo.findById(Id)</span>
+<span class="pc" id="L39">					.orElseThrow(() -&gt; new EmployeeNotFoundException(&quot;Employee not found for this id :: &quot; + Id));</span>
+<span class="fc" id="L40">			applyleav.setFirstName(respon.getFirstName());</span>
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">			if(reason.equalsIgnoreCase(&quot;PaidLeave&quot;)) {</span>
+				
+<span class="nc bnc" id="L43" title="All 2 branches missed.">				if(applyleav.getPaidLeave() &gt; 0) {</span>
+<span class="nc" id="L44">				 applyleav.setPaidLeave(applyleav.getPaidLeave()-1);</span>
+<span class="nc" id="L45">				 result = &quot;Paid Leave Successfully Granted for &quot;+Id+&quot;.&quot;;</span>
+				}else
+				{
+<span class="nc" id="L48">					result = Id+&quot; have Exhaused Paid Leave's\n Paid Leave rejected !&quot;;</span>
+				}
+<span class="nc" id="L50">				mongotemplate.save(applyleav);</span>
+			}
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">			else if(reason.equals(&quot;ML&quot;)) {</span>
+				
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">				if(applyleav.getMedicalLeave() &gt; 0) {</span>
+<span class="nc" id="L55">				 applyleav.setMedicalLeave(applyleav.getMedicalLeave()-1);</span>
+<span class="nc" id="L56">				 result = &quot;ML Leave Successfully Granted for &quot;+Id+&quot;.&quot;;</span>
+				}else
+				{
+<span class="fc" id="L59">					result = Id+&quot; have Exhaused ML leave's \n ML rejected !&quot;;</span>
+				}
+<span class="fc" id="L61">				mongotemplate.save(applyleav);</span>
+			}
+<span class="nc bnc" id="L63" title="All 2 branches missed.">			else if(reason.equals(&quot;PL&quot;)) {</span>
+				
+<span class="nc bnc" id="L65" title="All 2 branches missed.">				if(applyleav.getPrivilegeLeave() &gt; 0) {</span>
+<span class="nc" id="L66">				 applyleav.setPrivilegeLeave(applyleav.getPrivilegeLeave()-1);</span>
+<span class="nc" id="L67">				 result = &quot;PL Leave Successfully Granted for &quot;+Id+&quot;.&quot;;</span>
+				}else
+				{
+<span class="nc" id="L70">					result = Id+&quot; have Exhaused PL leave's \n PL rejected !&quot;;</span>
+				}
+<span class="nc" id="L72">				mongotemplate.save(applyleav);</span>
+			}
+<span class="nc bnc" id="L74" title="All 2 branches missed.">			else if(reason.equals(&quot;LOP&quot;)) {</span>
+				
+<span class="nc bnc" id="L76" title="All 2 branches missed.">				if(applyleav.getLossOfPay() &gt; 0) {</span>
+<span class="nc" id="L77">				 applyleav.setLossOfPay(applyleav.getLossOfPay()-1);</span>
+<span class="nc" id="L78">				 result = &quot;LOP Leave Successfully Granted for &quot;+Id+&quot;.&quot;;</span>
+				}else
+				{
+<span class="nc" id="L81">					result = Id+&quot; have Exhaused LOP leave's \n LOP rejected !&quot;;</span>
+				}
+<span class="nc" id="L83">				mongotemplate.save(applyleav);</span>
+				
+			}
+<span class="fc" id="L86">			applyleav.setReason(&quot;Last leave applied reason is &quot;+reason);</span>
+<span class="fc" id="L87">			Query qq = new Query();</span>
+<span class="fc" id="L88">			qq.addCriteria(Criteria.where(&quot;_id&quot;).is(Id));</span>
+<span class="fc" id="L89">			mongotemplate.findAndRemove(qq, ApplyLeave.class);</span>
+<span class="fc" id="L90">			mongotemplate.save(applyleav);</span>
+			
+<span class="fc" id="L92">		}</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">		else if(reqEntity == null){</span>
+<span class="nc" id="L94">		ApplyLeave response = applylevrepo.findById(Id)</span>
+<span class="nc" id="L95">				.orElseThrow(() -&gt; new EmployeeNotFoundException(&quot;Employee not found for this id :: &quot; + Id));</span>
+		
+<span class="nc" id="L97">		String reason = response.getReason();</span>
+<span class="nc" id="L98">		LeaveTypes applyleav = new LeaveTypes();</span>
+
+<span class="nc" id="L100">		applyleav.setId(response.getId());</span>
+<span class="nc" id="L101">		applyleav.setFirstName(response.getFirstName());</span>
+<span class="nc" id="L102">		applyleav.setPaidLeave(lev.getPaidLeave());</span>
+<span class="nc" id="L103">		applyleav.setMedicalLeave(lev.getMedicalLeave());</span>
+<span class="nc" id="L104">		applyleav.setPrivilegeLeave(lev.getPrivilegeLeave());</span>
+<span class="nc" id="L105">		applyleav.setLossOfPay(lev.getLossOfPay());</span>
+		
+<span class="nc bnc" id="L107" title="All 2 branches missed.">		if(reason.equalsIgnoreCase(&quot;PaidLeave&quot;)) {</span>
+<span class="nc" id="L108">			int n = lev.getPaidLeave();</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">			if(n&gt;0) {</span>
+<span class="nc" id="L110">			 applyleav.setPaidLeave(n-1);</span>
+<span class="nc" id="L111">			 result = &quot;Paid Leave Successfully Granted for &quot;+Id+&quot;.&quot;;</span>
+			}
+<span class="nc" id="L113">		}</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">		else if(reason.equals(&quot;ML&quot;)) {</span>
+<span class="nc" id="L115">			int n = lev.getMedicalLeave();</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">			if(n&gt;0) {</span>
+<span class="nc" id="L117">			 applyleav.setMedicalLeave(n-1);</span>
+<span class="nc" id="L118">			 result = &quot;Medical Leave Successfully Granted for &quot;+Id+&quot;.&quot;;</span>
+			}
+<span class="nc" id="L120">		}</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">		else if(reason.equals(&quot;PL&quot;)) {</span>
+<span class="nc" id="L122">			int n = lev.getPrivilegeLeave();</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">			if(n&gt;0) {</span>
+<span class="nc" id="L124">			 applyleav.setPrivilegeLeave(n-1);</span>
+<span class="nc" id="L125">			 result = &quot;Privilege Leave Successfully Granted for &quot;+Id+&quot;.&quot;;</span>
+			}
+<span class="nc" id="L127">		}</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">		else if(reason.equals(&quot;LOP&quot;)) {</span>
+<span class="nc" id="L129">			int n = lev.getLossOfPay();</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">			if(n&gt;0) {</span>
+<span class="nc" id="L131">			 applyleav.setLossOfPay(n-1);</span>
+<span class="nc" id="L132">			 result = &quot;LOP Leave Successfully Granted for &quot;+Id+&quot;.&quot;;</span>
+			}
+		}
+<span class="nc" id="L135">		applyleav.setReason(&quot;Last leave applied reason is &quot;+reason);</span>
+<span class="nc" id="L136">		mongotemplate.save(applyleav);</span>
+<span class="nc" id="L137">		Query qq = new Query();</span>
+<span class="nc" id="L138">		qq.addCriteria(Criteria.where(&quot;_id&quot;).is(Id));</span>
+<span class="nc" id="L139">		mongotemplate.findAndRemove(qq, ApplyLeave.class);</span>
+		}
+<span class="fc" id="L141">		return result;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

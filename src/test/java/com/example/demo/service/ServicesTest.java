@@ -20,7 +20,7 @@ import com.example.demo.controller.WorkingHoursController;
 import com.example.demo.exception.EmployeeNotFoundException;
 import com.example.demo.model.ApplyLeave;
 import com.example.demo.model.Attendance;
-import com.example.demo.model.WorkingHours;
+//import com.example.demo.model.WorkingHours;
 
 @SpringBootTest
 public class ServicesTest {
@@ -48,6 +48,7 @@ public class ServicesTest {
 	
 	@Autowired
 	private ApplyLeaveController appl;
+	
 	
 	@Test
 	public void addEmployeeTest() throws Exception {
@@ -133,16 +134,16 @@ public class ServicesTest {
 		assertTrue(lev.remainingLeave("BS14") instanceof String);
 	}
 	
-	@Test
-	public void createWorkHoursTest() throws EmployeeNotFoundException {
-		assertTrue(workhr.createWorkHours("BS14") instanceof WorkingHours);
-	}
+//	@Test
+//	public void createWorkHoursTest() throws EmployeeNotFoundException {
+//		assertTrue(workhr.createWorkHours("BS14") instanceof WorkingHours);
+//	}
 	
-	@Test
-	public void addWorkHoursTest() {
-		WorkingHours work = new WorkingHours("BS13",null,null,null, null);
-		assertTrue(addse.addWorkHrs(work) instanceof String);
-	}
+//	@Test
+//	public void addWorkHoursTest() {
+//		WorkingHours work = new WorkingHours("BS13",null,null,null, null);
+//		assertTrue(addse.addWorkHrs(work) instanceof String);
+//	}
 	
 	@Test
 	public void updateEmployeeWorkHoursTest() throws EmployeeNotFoundException {

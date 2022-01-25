@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LeaveController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AttendanceManagementSystem</a> &gt; <a href="index.source.html" class="el_package">com.example.demo.controller</a> &gt; <span class="el_source">LeaveController.java</span></div><h1>LeaveController.java</h1><pre class="source lang-java linenums">package com.example.demo.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.exception.EmployeeNotFoundException;
+
+import com.example.demo.model.Attendance;
+import com.example.demo.model.LeaveTypes;
+import com.example.demo.repository.AttendanceRepository;
+import com.example.demo.repository.LeaveRepository;
+
+@RequestMapping(&quot;/api/v1&quot;)
+@RestController
+<span class="fc" id="L19">public class LeaveController {</span>
+	
+	@Autowired
+	private AttendanceRepository attendancerepository;
+	
+	@Autowired
+	private LeaveRepository leaverepository;
+
+	
+	@GetMapping(&quot;/report/{Id}&quot;)
+	public String employeeLeaveReport (@PathVariable(value = &quot;Id&quot;) String employeeId) throws EmployeeNotFoundException {
+<span class="fc" id="L30">		Attendance attendance = attendancerepository.findById(employeeId)</span>
+<span class="pc" id="L31">				.orElseThrow(() -&gt; new EmployeeNotFoundException(&quot;Employee not found for this id :: &quot; + employeeId));</span>
+<span class="fc" id="L32">		LeaveTypes leav = leaverepository.findById(employeeId)</span>
+<span class="pc" id="L33">				.orElseThrow(() -&gt; new EmployeeNotFoundException(&quot;Employee not found for this id :: &quot; + employeeId));</span>
+<span class="fc" id="L34">		int two = 2;</span>
+<span class="fc" id="L35">		int one = 1;</span>
+<span class="fc" id="L36">		int four = 4;</span>
+<span class="fc" id="L37">		int n1 = 2 - leav.getPaidLeave();</span>
+<span class="fc" id="L38">		int n2 = 4 - leav.getMedicalLeave();</span>
+<span class="fc" id="L39">		int n3 = 1 - leav.getPrivilegeLeave();</span>
+<span class="fc" id="L40">	    int n4 = 2 - leav.getLossOfPay();</span>
+<span class="fc" id="L41">	    int totalleave = n1+n2+n3+n4;</span>
+<span class="fc" id="L42">	    int remainleaves = 9 - totalleave;</span>
+		
+<span class="fc" id="L44">		return (&quot;Employee ID       : &quot;+employeeId+ '\n'+&quot;First Name        : &quot;+attendance.getFirstName()+'\n'+&quot;Total Leave Taken : &quot;+totalleave+'\n'+&quot;Paid Leave        : &quot;+ (two-leav.getPaidLeave())+'\n'+&quot;Medical Leave     : &quot;</span>
+<span class="fc" id="L45">				+ (four-leav.getMedicalLeave())+'\n'+&quot;Privilege Leave   : &quot;+ (one-leav.getPrivilegeLeave())+'\n'+ &quot;LOP               : &quot;+(two-leav.getLossOfPay())+'\n'</span>
+				+ &quot;Remaining Leaves  : &quot;+remainleaves);
+		
+	}
+	
+	@GetMapping(&quot;/leaveTaken/{Id}&quot;)
+	public String leaveTaken (@PathVariable(value=&quot;Id&quot;) String employeeId) throws EmployeeNotFoundException{
+<span class="fc" id="L52">		Attendance attendance = attendancerepository.findById(employeeId)</span>
+<span class="pc" id="L53">				.orElseThrow(() -&gt; new EmployeeNotFoundException(&quot;Employee not found for this id :: &quot; + employeeId));</span>
+<span class="fc" id="L54">		LeaveTypes leav = leaverepository.findById(employeeId)</span>
+<span class="pc" id="L55">				.orElseThrow(() -&gt; new EmployeeNotFoundException(&quot;Employee not found for this id :: &quot; + employeeId));</span>
+<span class="fc" id="L56">		int n1 = 2 - leav.getPaidLeave();</span>
+<span class="fc" id="L57">		int n2 = 4 - leav.getMedicalLeave();</span>
+<span class="fc" id="L58">		int n3 = 1 - leav.getPrivilegeLeave();</span>
+<span class="fc" id="L59">	    int n4 = 2 - leav.getLossOfPay();</span>
+<span class="fc" id="L60">	    int totalleave = n1+n2+n3+n4;</span>
+<span class="fc" id="L61">	    return (&quot;Employee ID         : &quot;+employeeId+'\n'+&quot;First Name          : &quot;+attendance.getFirstName()+'\n'+&quot;Total leave Applied : &quot;+totalleave);</span>
+		
+	}
+	
+	@GetMapping(&quot;/remainingLeaves/{Id}&quot;)
+	public String remainingLeave (@PathVariable(value=&quot;Id&quot;) String employeeId) throws EmployeeNotFoundException{
+<span class="fc" id="L67">		Attendance attendance = attendancerepository.findById(employeeId)</span>
+<span class="pc" id="L68">				.orElseThrow(() -&gt; new EmployeeNotFoundException(&quot;Employee not found for this id :: &quot; + employeeId));</span>
+<span class="fc" id="L69">		LeaveTypes leav = leaverepository.findById(employeeId)</span>
+<span class="pc" id="L70">				.orElseThrow(() -&gt; new EmployeeNotFoundException(&quot;Employee not found for this id :: &quot; + employeeId));</span>
+<span class="fc" id="L71">		int n1 = 2 - leav.getPaidLeave();</span>
+<span class="fc" id="L72">		int n2 = 4 - leav.getMedicalLeave();</span>
+<span class="fc" id="L73">		int n3 = 1 - leav.getPrivilegeLeave();</span>
+<span class="fc" id="L74">	    int n4 = 2 - leav.getLossOfPay();</span>
+<span class="fc" id="L75">	    int totalleave = n1+n2+n3+n4;</span>
+<span class="fc" id="L76">	    int remainleaves = 9 - totalleave;</span>
+<span class="fc" id="L77">	    return (&quot;Employee ID      : &quot;+employeeId+'\n'+&quot;First Name       : &quot;+attendance.getFirstName()+'\n'+&quot;Remaining Leaves : &quot;+remainleaves);	</span>
+	}
+	
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -41,6 +41,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.sonarsource.scanner.maven</groupId>
+			<artifactId>sonar-maven-plugin</artifactId>
+			<version>3.2</version>
+		</dependency>
 		
 		
 		<dependency>
@@ -58,11 +63,6 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
 		</dependency>
-		<dependency>
-			<groupId>org.sonarsource.scanner.maven</groupId>
-			<artifactId>sonar-maven-plugin</artifactId>
-			<version>3.2</version>
-		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -75,6 +75,13 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<dependency>
+  			<groupId>junit</groupId>     <!-- NOT org.junit here -->
+  			<artifactId>junit-dep</artifactId>
+  			<version>4.8.2</version>
+  			<scope>test</scope>
+		</dependency>
+			
 	</dependencies>
 
 	<build>
@@ -83,7 +90,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -109,11 +115,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				</plugin>
+			</plugin>
 			
 		</plugins>
 	</build>
-	
 	<profiles>
 		<profile>
 			<id>sonar</id>
@@ -124,7 +129,7 @@
 				<!-- Optional URL to server. Default value is http://localhost:9000 -->
 
 				<jacoco.version>0.8.6</jacoco.version>
-				<sonar.projectName>TrainingProject1</sonar.projectName>
+				<sonar.projectName>AttendanceManagementSystem</sonar.projectName>
 
 				<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 				<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
@@ -137,5 +142,7 @@
 			</properties>
 		</profile>
 	</profiles>
+	
+
 	
 </project>

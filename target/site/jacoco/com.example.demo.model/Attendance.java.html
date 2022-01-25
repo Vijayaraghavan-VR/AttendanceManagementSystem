@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Attendance.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AttendanceManagementSystem</a> &gt; <a href="index.source.html" class="el_package">com.example.demo.model</a> &gt; <span class="el_source">Attendance.java</span></div><h1>Attendance.java</h1><pre class="source lang-java linenums">package com.example.demo.model;
+
+
+import java.time.LocalDate;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document (collection = &quot;Attendance&quot;)
+public class Attendance {
+	
+
+	
+	@NotBlank
+    @Size(max=100)
+    @Indexed(unique=true)
+	private String id;
+	
+	private String firstName;
+	private String lastName;
+	
+	@NotBlank
+    @Size(max=100)
+    @Indexed(unique=true)
+	private String emailId;
+	
+	private long phoneNumber;
+	private LocalDate dob;
+	private int experience;
+
+	public String role;
+<span class="pc" id="L35">	private String status = &quot;Active&quot;;</span>
+	private String manager;
+<span class="pc" id="L37">	private LocalDate joiningDate = LocalDate.now();</span>
+	private LocalDate terminatedDate;
+	private String team;
+
+	public Attendance() {
+<span class="fc" id="L42">		super();</span>
+<span class="fc" id="L43">	}</span>
+	
+	public Attendance( String firstName, String lastName, String emailId, long phoneNumber, LocalDate dob,
+<span class="fc" id="L46">			int experience, String team) {</span>
+		
+
+<span class="fc" id="L49">		this.firstName = firstName;</span>
+<span class="fc" id="L50">		this.lastName = lastName;</span>
+<span class="fc" id="L51">		this.emailId = emailId;</span>
+<span class="fc" id="L52">		this.phoneNumber = phoneNumber;</span>
+<span class="fc" id="L53">		this.dob = dob;</span>
+<span class="fc" id="L54">		this.experience = experience;</span>
+<span class="fc" id="L55">		this.team = team;</span>
+<span class="fc" id="L56">	}</span>
+	
+	
+
+	public Attendance(String id, String firstName, String lastName, String emailId, long phoneNumber, LocalDate dob,
+<span class="nc" id="L61">			int experience, String role, String status, String manager, LocalDate joiningDate, LocalDate terminatedDate, String team) {</span>
+		
+<span class="nc" id="L63">		this.id = id;</span>
+<span class="nc" id="L64">		this.firstName = firstName;</span>
+<span class="nc" id="L65">		this.lastName = lastName;</span>
+<span class="nc" id="L66">		this.emailId = emailId;</span>
+<span class="nc" id="L67">		this.phoneNumber = phoneNumber;</span>
+<span class="nc" id="L68">		this.dob = dob;</span>
+<span class="nc" id="L69">		this.experience = experience;</span>
+<span class="nc" id="L70">		this.role = role;</span>
+<span class="nc" id="L71">		this.status = status;</span>
+<span class="nc" id="L72">		this.manager = manager;</span>
+<span class="nc" id="L73">		this.joiningDate = joiningDate;</span>
+<span class="nc" id="L74">		this.terminatedDate = terminatedDate;</span>
+<span class="nc" id="L75">		this.team = team;</span>
+<span class="nc" id="L76">	}</span>
+
+	public String getId() {
+<span class="fc" id="L79">		return id;</span>
+	}
+
+	public void setId(String id) {
+<span class="fc" id="L83">		this.id = id;</span>
+<span class="fc" id="L84">	}</span>
+
+	public String getFirstName() {
+<span class="fc" id="L87">		return firstName;</span>
+	}
+
+	public void setFirstName(String firstName) {
+<span class="fc" id="L91">		this.firstName = firstName;</span>
+<span class="fc" id="L92">	}</span>
+
+	public String getLastName() {
+<span class="fc" id="L95">		return lastName;</span>
+	}
+
+	public void setLastName(String lastName) {
+<span class="fc" id="L99">		this.lastName = lastName;</span>
+<span class="fc" id="L100">	}</span>
+
+	public String getEmailId() {
+<span class="fc" id="L103">		return emailId;</span>
+	}
+
+	public void setEmailId(String emailId) {
+<span class="fc" id="L107">		this.emailId = emailId;</span>
+<span class="fc" id="L108">	}</span>
+
+	public long getPhoneNumber() {
+<span class="fc" id="L111">		return phoneNumber;</span>
+	}
+
+	public void setPhoneNumber(long phoneNumber) {
+<span class="fc" id="L115">		this.phoneNumber = phoneNumber;</span>
+<span class="fc" id="L116">	}</span>
+
+	public LocalDate getDob() {
+<span class="fc" id="L119">		return dob;</span>
+	}
+
+	public void setDob(LocalDate dob) {
+<span class="fc" id="L123">		this.dob = dob;</span>
+<span class="fc" id="L124">	}</span>
+
+	public int getExperience() {
+<span class="fc" id="L127">		return experience;</span>
+	}
+
+	public void setExperience(int experience) {
+<span class="fc" id="L131">		this.experience = experience;</span>
+<span class="fc" id="L132">	}</span>
+
+	public String getRole() {
+<span class="nc" id="L135">		return role;</span>
+	}
+
+	public void setRole(String role) {
+<span class="fc" id="L139">		this.role = role;</span>
+<span class="fc" id="L140">	}</span>
+
+	public String getStatus() {
+<span class="fc" id="L143">		return status;</span>
+	}
+
+	public void setStatus(String status) {
+<span class="fc" id="L147">		this.status = status;</span>
+<span class="fc" id="L148">	}</span>
+
+	public String getManager() {
+<span class="nc" id="L151">		return manager;</span>
+	}
+
+	public void setManager(String manager) {
+<span class="fc" id="L155">		this.manager = manager;</span>
+<span class="fc" id="L156">	}</span>
+
+	public LocalDate getJoiningDate() {
+<span class="fc" id="L159">		return joiningDate;</span>
+	}
+
+	public void setJoiningDate(LocalDate joiningDate) {
+<span class="fc" id="L163">		this.joiningDate = joiningDate;</span>
+<span class="fc" id="L164">	}</span>
+
+	public LocalDate getTerminatedDate() {
+<span class="fc" id="L167">		return terminatedDate;</span>
+	}
+
+	public void setTerminatedDate(LocalDate terminatedDate) {
+<span class="fc" id="L171">		this.terminatedDate = terminatedDate;</span>
+<span class="fc" id="L172">	}</span>
+
+	public String getTeam() {
+<span class="fc" id="L175">		return team;</span>
+	}
+
+	public void setTeam(String team) {
+<span class="fc" id="L179">		this.team = team;</span>
+<span class="fc" id="L180">	}</span>
+
+	@Override
+	public String toString() {
+<span class="nc" id="L184">		return &quot;Attendance [id=&quot; + id + &quot;, firstName=&quot; + firstName + &quot;, lastName=&quot; + lastName + &quot;, emailId=&quot; + emailId</span>
+				+ &quot;, phoneNumber=&quot; + phoneNumber + &quot;, dob=&quot; + dob + &quot;, experience=&quot; + experience + &quot;, role=&quot; + role
+				+ &quot;, status=&quot; + status + &quot;, joiningDate=&quot; + joiningDate + &quot;, terminatedDate=&quot; + terminatedDate
+				+ &quot;, team=&quot; + team + &quot;]&quot;;
+	}
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

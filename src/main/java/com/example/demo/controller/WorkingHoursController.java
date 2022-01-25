@@ -50,7 +50,7 @@ public class WorkingHoursController {
 		
 		workhrs.setFirstName(attendance.getFirstName());
 		addservice.addWorkHrs(workhrs);
-		workhrs.setCheckIn(LocalDateTime.now());
+		
 		return mongotemplate.save(workhrs);
 	}
 	

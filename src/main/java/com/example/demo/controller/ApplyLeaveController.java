@@ -38,7 +38,6 @@ public class ApplyLeaveController {
 		return result;
 	}
 	
-	
 	@GetMapping("/leaveresponses/{ID}")
 //	@PreAuthorize("hasRole('MANAGER')")
 	public List<ApplyLeave> getAppliedLeavPerTeam(@PathVariable(value="ID")String teamName) throws EmployeeNotFoundException {

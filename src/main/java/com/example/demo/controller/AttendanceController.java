@@ -48,8 +48,7 @@ public class AttendanceController {
 			String b = "BharathiSweets";
 			String c = "ChenthurSweets";
 			if(tea.equalsIgnoreCase(a)) {
-				prefix = "AS";
-				
+				prefix = "AS";		
 			}
 			else if(tea.equalsIgnoreCase(b)) {
 				prefix = "BS";

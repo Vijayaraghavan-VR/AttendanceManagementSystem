@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ApplyLeaveController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AttendanceManagementSystem</a> &gt; <a href="index.source.html" class="el_package">com.example.demo.controller</a> &gt; <span class="el_source">ApplyLeaveController.java</span></div><h1>ApplyLeaveController.java</h1><pre class="source lang-java linenums">package com.example.demo.controller;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.exception.EmployeeNotFoundException;
+import com.example.demo.model.ApplyLeave;
+import com.example.demo.model.LeaveDefaults;
+import com.example.demo.service.ApplyLeaveResponseService;
+import com.example.demo.service.ApplyLeaveService;
+import com.example.demo.service.GetEmployeeService;
+
+@RequestMapping(&quot;/api/v1&quot;)
+@RestController
+<span class="fc" id="L24">public class ApplyLeaveController {</span>
+	
+	@Autowired
+	private ApplyLeaveService applyleaveservice;
+	
+	@Autowired
+	private ApplyLeaveResponseService appliedservice;
+	
+	@Autowired
+	private GetEmployeeService gettemp;
+	
+	@PostMapping(&quot;/applyLeave&quot;)
+	public @Valid String instatiatingLeave(@Valid @RequestBody ApplyLeave leaves) throws EmployeeNotFoundException{
+<span class="fc" id="L37">		String result = appliedservice.addAppliedLeave(leaves);</span>
+<span class="fc" id="L38">		return result;</span>
+	}
+	
+	@GetMapping(&quot;/leaveresponses/{ID}&quot;)
+//	@PreAuthorize(&quot;hasRole('MANAGER')&quot;)
+	public List&lt;ApplyLeave&gt; getAppliedLeavPerTeam(@PathVariable(value=&quot;ID&quot;)String teamName) throws EmployeeNotFoundException {
+<span class="fc" id="L44">		return gettemp.getAppLeavofTeam(teamName);</span>
+	}
+	
+//	@PreAuthorize(&quot;hasRole('MANAGER')&quot;)
+	@PostMapping(&quot;/approveleave/{Id}&quot;)
+	public @Valid String approvingLeave(@PathVariable(value=&quot;Id&quot;)String empId) throws EmployeeNotFoundException {
+<span class="fc" id="L50">		LeaveDefaults lev = new LeaveDefaults();</span>
+<span class="fc" id="L51">		String result=&quot;&quot;;</span>
+<span class="fc" id="L52">		result = applyleaveservice.approveLeave(empId, lev);</span>
+<span class="fc" id="L53">		return result;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

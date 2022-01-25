@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WorkingHours.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AttendanceManagementSystem</a> &gt; <a href="index.source.html" class="el_package">com.example.demo.model</a> &gt; <span class="el_source">WorkingHours.java</span></div><h1>WorkingHours.java</h1><pre class="source lang-java linenums">package com.example.demo.model;
+
+import java.util.List;
+import java.time.LocalDateTime;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+
+
+@Document(collection=&quot;WorkHours&quot;)
+public class WorkingHours {
+	
+	private String id;
+	private String firstName;
+<span class="pc" id="L14">	private LocalDateTime checkIn = LocalDateTime.now();</span>
+	private LocalDateTime checkOut;
+	
+	private List&lt;Time&gt; inDetailedTimings;
+
+	public WorkingHours() {
+<span class="fc" id="L20">		super();</span>
+		// TODO Auto-generated constructor stub
+<span class="fc" id="L22">	}</span>
+
+	public WorkingHours(String id, String firstName, LocalDateTime checkIn, LocalDateTime checkOut, List&lt;Time&gt; inDetailedTimings) {
+<span class="nc" id="L25">		super();</span>
+<span class="nc" id="L26">		this.id = id;</span>
+<span class="nc" id="L27">		this.firstName = firstName;</span>
+<span class="nc" id="L28">		this.checkIn = checkIn;</span>
+<span class="nc" id="L29">		this.checkOut = checkOut;</span>
+<span class="nc" id="L30">		this.inDetailedTimings = inDetailedTimings;</span>
+<span class="nc" id="L31">	}</span>
+	
+	public String getId() {
+<span class="nc" id="L34">		return id;</span>
+	}
+
+	public void setId(String id) {
+<span class="nc" id="L38">		this.id = id;</span>
+<span class="nc" id="L39">	}</span>
+
+
+	public String getFirstName() {
+<span class="nc" id="L43">		return firstName;</span>
+	}
+
+	public void setFirstName(String firstName) {
+<span class="nc" id="L47">		this.firstName = firstName;</span>
+<span class="nc" id="L48">	}</span>
+
+	public LocalDateTime getCheckIn() {
+<span class="fc" id="L51">		return checkIn;</span>
+	}
+
+	public void setCheckIn(LocalDateTime checkIn) {
+<span class="nc" id="L55">		this.checkIn = checkIn;</span>
+<span class="nc" id="L56">	}</span>
+
+	public LocalDateTime getCheckOut() {
+<span class="nc" id="L59">		return checkOut;</span>
+	}
+
+	public void setCheckOut(LocalDateTime checkOut) {
+<span class="fc" id="L63">		this.checkOut = checkOut;</span>
+<span class="fc" id="L64">	}</span>
+
+	public List&lt;Time&gt; getInDetailedTimings() {
+<span class="nc" id="L67">		return inDetailedTimings;</span>
+	}
+
+	public void setInDetailedTimings(List&lt;Time&gt; inDetailedTimings) {
+<span class="fc" id="L71">		this.inDetailedTimings = inDetailedTimings;</span>
+<span class="fc" id="L72">	}</span>
+
+	@Override
+	public String toString() {
+<span class="nc" id="L76">		return &quot;WorkingHours [id=&quot; + id + &quot;, checkIn=&quot; + checkIn + &quot;, checkOut=&quot; + checkOut + &quot;, inDetailedTimings=&quot;</span>
+				+ inDetailedTimings + &quot;]&quot;;
+	}
+	
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

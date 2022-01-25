@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SequenceGeneratorService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AttendanceManagementSystem</a> &gt; <a href="index.source.html" class="el_package">com.example.demo.service</a> &gt; <span class="el_source">SequenceGeneratorService.java</span></div><h1>SequenceGeneratorService.java</h1><pre class="source lang-java linenums">package com.example.demo.service;
+
+
+import static org.springframework.data.mongodb.core.FindAndModifyOptions.options;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.model.DatabaseSequence;
+
+
+@Service
+<span class="fc" id="L16">public class SequenceGeneratorService {</span>
+
+		@Autowired
+		private MongoOperations mongoOperation;
+
+		public int getCount(String seqName) {
+<span class="fc" id="L22">			Query q = new Query(Criteria.where(&quot;id&quot;).is(seqName));</span>
+<span class="fc" id="L23">			Update update = new Update().inc(&quot;count&quot;, 1);</span>
+<span class="fc" id="L24">			DatabaseSequence counter = mongoOperation.findAndModify(q, update, options().returnNew(true).upsert(true),</span>
+					DatabaseSequence.class);
+<span class="fc" id="L26">			return counter.getCount();</span>
+
+		}
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
